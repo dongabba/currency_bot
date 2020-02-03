@@ -29,12 +29,12 @@ bot.onText(/\/curse/, (msg, match) => {
                 callback_data: 'RUR'
             },
             {
-                text: 'Br - BYN',
-                callback_data: 'BYN'
+                text: '₴ - UAH',
+                callback_data: 'UAH'
             },
             {
-                text: '฿ - BTC',
-                callback_data: 'BTC'
+                text: '元 - CNY',
+                callback_data: 'CNY'
             }, 
           ]
         ]
@@ -44,14 +44,11 @@ bot.onText(/\/curse/, (msg, match) => {
 
 bot.on("callback_query", query =>{
     const id = query.message.chat.id;
-    request('https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5', function(error, response, body){
+    request('http://www.nbrb.by/api/exrates/rates?periodicity=0', function(error, response, body){
         const data = JSON.parse(body);
-        const result = data.filter(item => item.ccy === query.data)[0];
+        const result = data.filter(item => item.Cur_Abbreviation === query.data)[0];
         let md = `
-            *${result.ccy} => ${result.base_ccy}*
-            Buy: _${result.buy}_
-            Sale: _${result.sale}_
-            `;
+            *${result.Cur_Scale} ${result.Cur_Name} = ${result.Cur_OfficialRate}*`;
         bot.sendMessage(id, md, {parse_mode: 'Markdown'});
     });
 });
