@@ -48,7 +48,7 @@ bot.on("callback_query", query =>{
         const data = JSON.parse(body);
         const result = data.filter(item => item.Cur_Abbreviation === query.data)[0];
         let md = `
-            *${result.Cur_Scale} ${result.Cur_Name} = ${result.Cur_OfficialRate}*`;
+            *${result.Cur_Scale} ${result.Cur_Name} = ${result.Cur_OfficialRate} BYN*`;
         bot.sendMessage(id, md, {parse_mode: 'Markdown'});
     });
 });
