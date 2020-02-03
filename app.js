@@ -25,8 +25,8 @@ bot.onText(/\/curse/, (msg, match) => {
                 callback_data: 'USD'
             },
             {
-                text: '₽ - RUR',
-                callback_data: 'RUR'
+                text: '₽ - RUB',
+                callback_data: 'RUB'
             },
             {
                 text: '₴ - UAH',
