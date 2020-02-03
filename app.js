@@ -8,13 +8,14 @@ const token = '1093954762:AAFk1n53QvIVTB9seTPopgHYcRGWeav0T3o';
 const bot = new TelegramBot(token, {polling: true});
 
 // Matches "/echo [whatever]"
-bot.onText(/\/curse (.+)/, (msg, match) => {
+bot.onText(/\/curse/, (msg, match) => {
 
 
   const chatId = msg.chat.id;
   bot.sendMessage(chatId, 'Выберите какая валюта вас интересует?', {
       reply_markup:{
           inline_keyboard:[
+              [
               {
                   text: '€ - EUR',
                   callback_data: 'EUR'
@@ -36,6 +37,7 @@ bot.onText(/\/curse (.+)/, (msg, match) => {
                 callback_data: 'BTC'
             }, 
           ]
+        ]
       }
   });
 });
@@ -52,10 +54,4 @@ bot.on("callback_query", query =>{
             `;
         bot.sendMessage(id, md, {parse_mode: 'Markdown'});
     });
-});
-bot.on('message', (msg) => {
-  const chatId = msg.chat.id;
-
-  // send a message to the chat acknowledging receipt of their message
-  bot.sendMessage(chatId, 'Received your message');
 });
